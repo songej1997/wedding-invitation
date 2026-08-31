@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>원우 ・ 혜림 결혼합니다</title>
+
+<!-- ============================================================
+  폰트
+  - Pretendard : 한글 본문/제목용 고딕
+  - Cormorant Garamond : 영문 스크립트/이탤릭 포인트 타이포 (커버, ONE STORY 등)
+============================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+<style>
+/* ============================================================
+   0. 공통 변수 & 리셋
+   ------------------------------------------------------------
+   참고 영상 톤: 컬러 블록 없이 아이보리/라이트그레이 배경 +
+   화이트 카드 + 코랄(로즈) 포인트 하나만 사용하는 절제된 배색
+============================================================= */
+:root{
+  --bg:          #F4F3F0;   /* 전체 배경 (라이트 웜그레이) */
+  --card:        #FFFFFF;   /* 카드/버튼 배경 */
+  --ink:         #2B2B28;   /* 본문 텍스트 */
+  --ink-soft:    #918F87;   /* 보조/설명 텍스트 */
+  --ink-faint:   #C2C0B8;   /* 아주 옅은 텍스트/테두리 */
+  --accent:      #D98F7C;   /* 코랄 로즈 포인트 (요일/디데이/버튼 강조) */
+  --accent-blue: #8CA0C7;   /* 토요일 표기용 보조색 */
+  --line:        #E4E2DC;   /* 얇은 구분선 */
+
+  --font-kr:     'Pretendard', 'Noto Sans KR', sans-serif;
+  --font-serif:  'Noto Serif KR', serif;
+  --font-en:     'Cormorant Garamond', serif;
+
+  --max-width: 500px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ background:#E7E5DF; }
+
+body{
+  font-family: var(--font-kr);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: var(--bg);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.08);
+}
+
+section{ padding: 64px 28px; }
+
+.eyebrow{
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  color: var(--ink-soft);
+  text-align:center;
+  margin-bottom: 14px;
+}
+
+.headline{
+  font-size: 21px;
+  font-weight: 700;
+  text-align:center;
+  color: var(--ink);
+  margin-bottom: 30px;
+  letter-spacing: -0.01em;
+}
+
+.body-text{
+  text-align:center;
+  font-size: 14.5px;
+  line-height: 2.05;
+  color: var(--ink);
+}
+
+/* 스크롤 시 은은하게 떠오르는 연출 (reduced-motion 배려) */
+/* 스크롤 진입 시 문장(줄) 단위로 순차적으로 떠오르는 효과.
+   .reveal 섹션 안의 텍스트 줄마다 JS가 .line-reveal 을 붙이고
+   transition-delay를 순서대로 매겨 "글씨가 하나씩 살아나는" 느낌을 냅니다. */
+.line-reveal{
+  opacity:0;
+  transform: translateY(14px);
+  transition: opacity .6s cubic-bezier(.2,.6,.2,1), transform .6s cubic-bezier(.2,.6,.2,1);
+}
+.line-reveal.is-visible{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  .line-reveal{ opacity:1; transform:none; transition:none; }
+  *{ transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+}
+
+/* ============================================================
+   1. 커버 섹션
+============================================================= */
+.cover{ padding: 56px 28px 40px; text-align:center; }
+
+.cover__eyebrow{
+  font-size: 11.5px;
+  letter-spacing: 0.34em;
+  color: var(--ink-soft);
+  margin-bottom: 26px;
+}
+
+.cover__frame{
+  position:relative;
+  width:100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  overflow:hidden;
+  box-shadow: 0 18px 40px rgba(43,43,40,0.16);
+}
+
+.cover__frame img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  /* 🔧 실제 배포 시 image1.jpg (메인 사진)로 교체하세요 */
+}
+
+.cover__frame-placeholder{
+  width:100%; height:100%;
+  display:flex; align-items:flex-start; justify-content:flex-start;
+  padding: 16px;
+  background: linear-gradient(160deg,#DAD6CB 0%, #C7C2B4 100%);
+  color: rgba(43,43,40,0.4);
+  font-size: 12px; letter-spacing: 0.08em;
+}
+
+.cover__overlay-word{
+  position:absolute;
+  left:0; right:0; bottom:14%;
+  font-family: var(--font-en);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 56px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.25);
+}
+
+.cover__names{
+  margin-top: 30px;
+  font-family: var(--font-en);
+  font-size: 15px;
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   2. 초대말 섹션
+============================================================= */
+.invite .body-text{ margin-bottom: 6px; }
+
+.invite__divider{
+  width: 28px;
+  height: 1px;
+  background: var(--ink-faint);
+  margin: 34px auto;
+}
+
+.parents{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-align:center;
+}
+
+.parents b{ color: var(--ink); font-weight:600; }
+
+/* 신랑 · 신부 이름 옆 전화 아이콘 (tel: 바로 연결) */
+.couple-call{
+  display:flex;
+  justify-content:center;
+  gap: 36px;
+  margin-top: 34px;
+}
+
+.couple-call__person{ text-align:center; }
+
+.couple-call__role{
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.couple-call__link{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  color: var(--ink);
+  text-decoration:none;
+  font-size: 15px;
+  font-weight:600;
+}
+
+.couple-call__link .icon-call{
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* 혼주에게 연락하기 버튼 */
+.host-call-btn{
+  display:block;
+  width:100%;
+  margin-top: 26px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 15px;
+  font-size: 14px;
+  color: var(--ink);
+  cursor:pointer;
+}
+
+/* 혼주 연락 바텀시트(모달) */
+.host-sheet{
+  position:fixed;
+  inset:0;
+  z-index: 1000;
+  display:none;
+}
+.host-sheet.is-open{ display:block; }
+
+.host-sheet__backdrop{
+  position:absolute; inset:0;
+  background: rgba(20,18,14,0.45);
+  opacity:0;
+  transition: opacity .25s ease;
+}
+.host-sheet.is-open .host-sheet__backdrop{ opacity:1; }
+
+.host-sheet__panel{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  transform: translate(-50%, 100%);
+  width:100%;
+  max-width: var(--max-width);
+  background: var(--card);
+  border-radius: 20px 20px 0 0;
+  padding: 26px 24px 36px;
+  transition: transform .3s ease;
+  max-height: 78vh;
+  overflow-y:auto;
+}
+.host-sheet.is-open .host-sheet__panel{ transform: translate(-50%, 0); }
+
+.host-sheet__head{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  margin-bottom: 22px;
+}
+.host-sheet__title{ font-size: 15px; font-weight:700; }
+.host-sheet__close{
+  position:absolute; right:0; top:-4px;
+  border:none; background:none;
+  font-size: 20px;
+  color: var(--ink-soft);
+  cursor:pointer;
+  line-height:1;
+  padding:4px;
+}
+
+.host-sheet__cols{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.host-sheet__col-title{
+  font-size: 13px;
+  font-weight:700;
+  text-align:center;
+  margin-bottom: 18px;
+}
+
+.host-sheet__person{
+  text-align:center;
+  margin-bottom: 22px;
+}
+.host-sheet__person-name{ font-size: 13px; color: var(--ink); margin-bottom: 10px; }
+
+.host-sheet__actions{
+  display:flex;
+  justify-content:center;
+  gap: 18px;
+}
+.host-sheet__actions a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 38px; height:38px;
+  border-radius:50%;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration:none;
+  font-size: 15px;
+}
+
+/* ============================================================
+   3. 캘린더 & D-Day 섹션
+============================================================= */
+.calendar{ text-align:center; }
+
+.calendar__kicker{
+  font-family: var(--font-en);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+
+.calendar__title{
+  font-family: var(--font-en);
+  font-weight:500;
+  font-size: 34px;
+  letter-spacing: 0.06em;
+  margin-bottom: 34px;
+}
+
+.calendar__date{
+  font-family: var(--font-en);
+  font-size: 26px;
+  font-weight:500;
+  color: var(--ink);
+}
+
+.calendar__time{
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.calendar__grid{
+  margin-top: 30px;
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 12px;
+}
+
+.calendar__dow{
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.calendar__dow:nth-child(1){ color: var(--accent); }
+.calendar__dow:nth-child(7){ color: var(--accent-blue); }
+
+.calendar__day{
+  font-size: 13px;
+  color: var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  height: 30px;
+}
+.calendar__day.is-sun{ color: var(--accent); }
+.calendar__day.is-sat{ color: var(--accent-blue); }
+.calendar__day.is-empty{ visibility:hidden; }
+
+.calendar__day.is-wedding{
+  background: var(--accent);
+  color:#fff;
+  border-radius: 50%;
+  font-weight:600;
+}
+
+.dday{
+  margin-top: 40px;
+}
+
+.dday__labels{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 260px;
+  margin: 0 auto;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+}
+
+.dday__nums{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 260px;
+  margin: 6px auto 0;
+  font-family: var(--font-en);
+  font-size: 26px;
+  font-weight:500;
+  color: var(--ink);
+}
+
+.dday__caption{
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   4. 갤러리 섹션 (풀블리드 스와이프 슬라이더)
+============================================================= */
+.gallery{ padding-left:0; padding-right:0; }
+.gallery .eyebrow, .gallery .headline{ padding: 0 28px; }
+.gallery .headline{ margin-bottom: 34px; }
+
+.gallery__viewport{
+  position:relative;
+  width:100%;
+  aspect-ratio: 3 / 4;
+  overflow:hidden;
+  touch-action: pan-y;
+}
+
+.gallery__track{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+.gallery__slide{
+  min-width:100%;
+  height:100%;
+  position:relative;
+  background:#DAD6CB;
+}
+
+.gallery__slide img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.gallery__slide-placeholder{
+  position:absolute; inset:0;
+  display:flex; align-items:flex-start; justify-content:flex-start;
+  padding: 16px;
+  color: rgba(43,43,40,0.4);
+  font-size: 12px;
+}
+
+.gallery__arrow{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width: 36px; height:36px;
+  border-radius:50%;
+  border:none;
+  background: rgba(255,255,255,0.85);
+  color: var(--ink);
+  font-size: 16px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  z-index:2;
+}
+.gallery__arrow--prev{ left: 14px; }
+.gallery__arrow--next{ right: 14px; }
+
+.gallery__count{
+  position:absolute;
+  bottom: 14px; right:16px;
+  background: rgba(0,0,0,0.45);
+  color:#fff;
+  font-size: 11.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index:2;
+}
+
+/* ============================================================
+   5. 오시는 길 섹션
+============================================================= */
+.location{ padding-top:0; }
+
+.location__photo{
+  width: calc(100% + 56px);
+  margin: 0 -28px 40px;
+  aspect-ratio: 16/10;
+  background:#DAD6CB;
+  overflow:hidden;
+}
+.location__photo img{ width:100%; height:100%; object-fit:cover; }
+.location__photo-placeholder{
+  width:100%; height:100%;
+  display:flex; align-items:flex-start; justify-content:flex-start;
+  padding: 16px;
+  color: rgba(43,43,40,0.4);
+  font-size: 12px;
+}
+
+.location__venue{ text-align:center; }
+.location__venue-name{ font-size: 16px; font-weight:700; margin-bottom: 8px; }
+.location__addr{ font-size: 13.5px; color: var(--ink-soft); }
+.location__tel{ margin-top: 6px; font-size: 13.5px; color: var(--ink-soft); }
+
+/* 지도 자리 : 실 서비스에서는 카카오맵/네이버맵 JS SDK로 교체 */
+.map-holder{
+  margin-top: 26px;
+  width:100%;
+  height: 200px;
+  background:
+    repeating-linear-gradient(0deg, #EAE8E2 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, #EAE8E2 0 1px, transparent 1px 28px),
+    #F1EFE9;
+  border: 1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--ink-soft);
+  font-size: 12px;
+  text-align:center;
+  line-height:1.7;
+  border-radius: 4px;
+}
+
+/* 길찾기 앱 바로가기 버튼 (딥링크, API 키 불필요) */
+.nav-buttons{
+  display:flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.nav-buttons a{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 12px 0;
+  font-size: 12.5px;
+  color: var(--ink);
+  text-decoration:none;
+}
+
+.transit{
+  margin-top: 44px;
+  display:flex;
+  flex-direction:column;
+  gap: 28px;
+}
+
+.transit__title{
+  font-size: 13px;
+  font-weight:700;
+  margin-bottom: 12px;
+}
+
+.transit__row{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.transit__dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.transit__note{
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  padding-left: 16px;
+}
+
+/* ============================================================
+   6. 마음 전하실 곳
+   신랑측 / 신부측이 각각 독립적으로 펼쳐지는 아코디언 형태.
+   (동시에 둘 다 열어둘 수 있음 — 참고 영상과 동일한 동작)
+============================================================= */
+.account-accordion{
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.account-accordion__item{ border-bottom: 1px solid var(--line); }
+
+.account-accordion__head{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:none;
+  border:none;
+  padding: 18px 4px;
+  font-size: 14.5px;
+  font-weight:700;
+  color: var(--ink);
+  cursor:pointer;
+}
+
+.account-accordion__icon{
+  color: var(--ink-faint);
+  font-size: 14px;
+  transition: transform .3s ease;
+}
+.account-accordion__item.is-open .account-accordion__icon{ transform: rotate(45deg); }
+
+.account-accordion__body{
+  max-height:0;
+  overflow:hidden;
+  transition: max-height .35s ease;
+}
+
+.account-accordion__body-inner{
+  padding: 4px 4px 22px;
+  display:flex;
+  flex-direction:column;
+  gap: 20px;
+}
+
+.account-person{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+}
+
+.account-person__name{ font-size: 14px; font-weight:700; margin-bottom: 6px; }
+
+.account-person__num{
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.account-person__actions{
+  display:flex;
+  gap: 8px;
+  flex-shrink:0;
+}
+
+.account-person__btn{
+  width: 34px; height:34px;
+  border-radius:50%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  text-decoration:none;
+}
+.account-person__btn.is-copied{ border-color: var(--accent); color: var(--accent); }
+
+/* 카카오페이 버튼: data-kakaopay-url 이 있는 경우에만 노란색으로 활성화됩니다 */
+.account-person__btn--pay{
+  background: #FEE500;
+  border-color: #FEE500;
+  color: #3C1E1E;
+}
+
+/* ============================================================
+   7. 클로징 섹션
+============================================================= */
+.closing{
+  position:relative;
+  padding: 0;
+  min-height: 360px;
+  display:flex;
+  align-items:flex-end;
+}
+
+.closing__bg{
+  position:absolute; inset:0;
+  background:#B9B6AC;
+}
+.closing__bg img{ width:100%; height:100%; object-fit:cover; }
+.closing__bg-placeholder{
+  width:100%; height:100%;
+  display:flex; align-items:flex-start; justify-content:flex-start;
+  padding: 16px;
+  color: rgba(255,255,255,0.5); font-size:12px;
+}
+
+.closing__scrim{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(20,18,14,0.1) 0%, rgba(20,18,14,0.65) 100%);
+}
+
+.closing__content{
+  position:relative;
+  padding: 60px 28px 44px;
+  color:#fff;
+  text-align:center;
+  width:100%;
+}
+
+.closing__quote{
+  font-size: 14.5px;
+  line-height: 1.95;
+  margin-bottom: 26px;
+}
+
+.closing__share{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  background: rgba(255,255,255,0.92);
+  color: var(--ink);
+  border:none;
+  border-radius: 24px;
+  padding: 13px 22px;
+  font-size: 13px;
+  cursor:pointer;
+}
+
+.footer{
+  text-align:center;
+  padding: 40px 28px 56px;
+}
+.footer__names{ font-size: 12.5px; letter-spacing: 0.1em; color: var(--ink-soft); }
+.footer__copyright{ margin-top: 18px; font-size: 10.5px; color: var(--ink-faint); }
+
+/* 토스트 */
+.toast{
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%, 20px);
+  background: rgba(30,30,26,0.92);
+  color: #F4F0E6;
+  font-size: 13px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 1200;
+  white-space: nowrap;
+}
+.toast.is-show{ opacity:1; transform: translate(-50%, 0); }
+
+button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============================================================
+       1. 커버 섹션
+       🔧 image1.jpg 를 실제 메인 사진 파일로 교체하세요.
+  ============================================================= -->
+  <section class="cover">
+    <p class="cover__eyebrow">WEDDING CEREMONY</p>
+    <div class="cover__frame">
+      <!-- 이미지가 있으면 아래 img 태그의 주석을 해제하고 placeholder div는 삭제하세요 -->
+      <!-- <img src="image1.jpg" alt="원우 · 혜림 메인 사진"> -->
+      <div class="cover__frame-placeholder">MAIN PHOTO<br>(image1.jpg)</div>
+      <div class="cover__overlay-word">invite</div>
+    </div>
+    <p class="cover__names">WONWOO &amp; HYERIM</p>
+  </section>
+
+  <!-- ============================================================
+       2. 초대말 섹션
+  ============================================================= -->
+  <section class="invite reveal">
+    <p class="eyebrow">INVITATION</p>
+    <h2 class="headline">소중한 분들을 초대합니다</h2>
+
+    <p class="body-text">원우와 혜림, 결혼합니다.</p>
+    <p class="body-text">저희 두 사람, 사랑의 결실을 맺습니다.</p>
+    <p class="body-text">소중한 인연들을 이 기쁜 자리에 초청드리니</p>
+    <p class="body-text">함께 축복해주시면 감사하겠습니다.</p>
+
+    <div class="invite__divider"></div>
+
+    <div class="parents">
+      <p><b>최백림 · 김미애</b>의 장남 <b>최원우</b></p>
+      <p><b>송동섭 · 박옥이</b>의 장녀 <b>송혜림</b></p>
+    </div>
+
+    <!-- 신랑 · 신부 이름 옆 전화 아이콘 : 바로 tel: 링크로 연결됩니다. -->
+    <!-- 🔧 tel: 뒤 번호를 실제 전화번호로 교체하세요. -->
+    <div class="couple-call">
+      <div class="couple-call__person">
+        <p class="couple-call__role">신랑</p>
+        <a class="couple-call__link" href="tel:01000000000">
+          <span class="icon-call">&#128222;</span> 최원우
+        </a>
+      </div>
+      <div class="couple-call__person">
+        <p class="couple-call__role">신부</p>
+        <a class="couple-call__link" href="tel:01000000000">
+          <span class="icon-call">&#128222;</span> 송혜림
+        </a>
+      </div>
+    </div>
+
+    <!-- 혼주에게 연락하기 버튼 : 누르면 아래 바텀시트(#hostSheet)가 열립니다. -->
+    <button class="host-call-btn" id="hostCallOpen">혼주에게 연락하기</button>
+  </section>
+
+  <!-- ============================================================
+       혼주 연락 바텀시트
+       🔧 tel: / sms: 뒤 번호를 실제 연락처로 교체하세요.
+  ============================================================= -->
+  <div class="host-sheet" id="hostSheet">
+    <div class="host-sheet__backdrop" id="hostSheetBackdrop"></div>
+    <div class="host-sheet__panel">
+      <div class="host-sheet__head">
+        <p class="host-sheet__title">혼주에게 연락하기</p>
+        <button class="host-sheet__close" id="hostSheetClose" aria-label="닫기">&times;</button>
+      </div>
+      <div class="host-sheet__cols">
+        <div>
+          <p class="host-sheet__col-title">신랑측</p>
+          <div class="host-sheet__person">
+            <p class="host-sheet__person-name">아버지 최백림</p>
+            <div class="host-sheet__actions">
+              <a href="tel:01000000000" aria-label="전화">&#128222;</a>
+              <a href="sms:01000000000" aria-label="문자">&#9993;&#65039;</a>
+            </div>
+          </div>
+          <div class="host-sheet__person">
+            <p class="host-sheet__person-name">어머니 김미애</p>
+            <div class="host-sheet__actions">
+              <a href="tel:01000000000" aria-label="전화">&#128222;</a>
+              <a href="sms:01000000000" aria-label="문자">&#9993;&#65039;</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="host-sheet__col-title">신부측</p>
+          <div class="host-sheet__person">
+            <p class="host-sheet__person-name">아버지 송동섭</p>
+            <div class="host-sheet__actions">
+              <a href="tel:01000000000" aria-label="전화">&#128222;</a>
+              <a href="sms:01000000000" aria-label="문자">&#9993;&#65039;</a>
+            </div>
+          </div>
+          <div class="host-sheet__person">
+            <p class="host-sheet__person-name">어머니 박옥이</p>
+            <div class="host-sheet__actions">
+              <a href="tel:01000000000" aria-label="전화">&#128222;</a>
+              <a href="sms:01000000000" aria-label="문자">&#9993;&#65039;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       3. 캘린더 & D-Day 섹션
+  ============================================================= -->
+  <section class="calendar reveal">
+    <p class="calendar__kicker">Two Hearts</p>
+    <p class="calendar__title">ONE STORY</p>
+
+    <p class="calendar__date" id="calendarDate">2026.12.19</p>
+    <p class="calendar__time">토요일 오후 1시 30분</p>
+
+    <div class="calendar__grid" id="calendarGrid">
+      <!-- JS가 요일 헤더 + 12월 날짜 칸을 자동 생성합니다 -->
+    </div>
+
+    <div class="dday">
+      <div class="dday__labels">
+        <span>DAYS</span><span>HOUR</span><span>MIN</span><span>SEC</span>
+      </div>
+      <div class="dday__nums">
+        <span id="ddayDays">00</span><span id="ddayHours">00</span><span id="ddayMinutes">00</span><span id="ddaySeconds">00</span>
+      </div>
+      <p class="dday__caption" id="ddayCaption">원우, 혜림의 결혼식이 00일 남았습니다.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. 갤러리 섹션 (풀블리드 스와이프 슬라이더)
+       🔧 image1.jpg ~ image10.jpg 를 실제 사진 파일로 교체하세요.
+  ============================================================= -->
+  <section class="gallery reveal">
+    <p class="eyebrow">GALLERY</p>
+    <h2 class="headline">웨딩 갤러리</h2>
+
+    <div class="gallery__viewport">
+      <div class="gallery__track" id="galleryTrack">
+        <!-- JS가 image1.jpg ~ image10.jpg 슬라이드를 생성합니다 -->
+      </div>
+      <button class="gallery__arrow gallery__arrow--prev" id="galleryPrev" aria-label="이전 사진">&#10094;</button>
+      <button class="gallery__arrow gallery__arrow--next" id="galleryNext" aria-label="다음 사진">&#10095;</button>
+      <div class="gallery__count" id="galleryCount">1 / 10</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. 오시는 길 섹션
+  ============================================================= -->
+  <section class="location reveal">
+    <div class="location__photo">
+      <!-- <img src="image9.jpg" alt="예식장 전경"> -->
+      <div class="location__photo-placeholder">VENUE PHOTO<br>(image9.jpg)</div>
+    </div>
+
+    <p class="eyebrow">LOCATION</p>
+    <h2 class="headline">오시는 길</h2>
+
+    <div class="location__venue">
+      <p class="location__venue-name">빌라드지디 수서 단독홀</p>
+      <p class="location__addr" id="venueAddr">서울특별시 강남구 밀리내로 10길 39 (실제 주소로 교체 필요)</p>
+      <p class="location__tel">Tel. 02-000-0000</p>
+    </div>
+
+    <!-- 🔧 실 서비스 배포 시 이 영역을 카카오맵/네이버맵 JS SDK로 교체하세요 -->
+    <div class="map-holder" id="mapHolder">
+      지도 영역<br>(카카오맵 / 네이버맵 JS SDK 삽입 위치)
+    </div>
+
+    <!-- 길찾기 딥링크: API 키 없이도 실제로 동작합니다. 주소만 실제 값으로 교체하세요. -->
+    <div class="nav-buttons" id="navButtons">
+      <a id="naverMapLink" href="#" target="_blank" rel="noopener">네이버지도</a>
+      <a id="kakaoMapLink" href="#" target="_blank" rel="noopener">카카오맵</a>
+    </div>
+
+    <div class="transit">
+      <div>
+        <p class="transit__title">지하철</p>
+        <div class="transit__row"><span class="transit__dot" style="background:#00A651"></span>7호선 수서역 3번 출구</div>
+        <div class="transit__row"><span class="transit__dot" style="background:#F5A200"></span>수서역(SRT/분당선) 3번 출구</div>
+        <p class="transit__note">출구에서 도보 5분 거리 (임시 안내, 실제 정보로 교체)</p>
+      </div>
+      <div>
+        <p class="transit__title">버스</p>
+        <div class="transit__row"><span class="transit__dot" style="background:#3F6EBA"></span>간선버스 000, 000</div>
+        <div class="transit__row"><span class="transit__dot" style="background:#53B332"></span>지선버스 0000, 0000</div>
+        <p class="transit__note">예식장 앞 정류장 하차 (임시 안내, 실제 정보로 교체)</p>
+      </div>
+      <div>
+        <p class="transit__title">자가용 · 주차</p>
+        <p class="transit__note" style="padding-left:0;">건물 내 지하주차장 이용 가능, 하객 2시간 무료 (임시 안내, 실제 정보로 교체)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. 마음 전하실 곳 (탭 + 가로 스크롤 계좌 카드)
+       🔧 계좌번호/예금주는 아래 텍스트와 data-account 값을 함께 교체하세요.
+  ============================================================= -->
+  <section class="accounts reveal">
+    <p class="eyebrow">ACCOUNT</p>
+    <h2 class="headline">마음 전하실 곳</h2>
+    <p class="body-text">참석이 어려우신 분들을 위해</p>
+    <p class="body-text">계좌번호를 기재하였습니다.</p>
+    <p class="body-text">너그러운 마음으로 양해 부탁드립니다.</p>
+
+    <!-- 신랑측 / 신부측이 각각 독립적으로 펼쳐지는 아코디언입니다.
+         🔧 이름 / 은행 / 계좌번호 텍스트와 data-copy-target 값을 함께 교체하세요.
+         🔧 카카오페이 송금 링크가 있다면 data-kakaopay-url="https://qr.kakaopay.com/..." 를 채워주면
+            노란 카카오페이 버튼이 그 링크로 연결됩니다. 비워두면 계좌번호 복사로 대체됩니다. -->
+    <div class="account-accordion">
+
+      <!-- 신랑측 -->
+      <div class="account-accordion__item">
+        <button class="account-accordion__head" data-account-target="groomAccounts">
+          <span>신랑측</span>
+          <span class="account-accordion__icon">+</span>
+        </button>
+        <div class="account-accordion__body" id="groomAccounts">
+          <div class="account-accordion__body-inner">
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">신랑 최원우</p>
+                <p class="account-person__num">국민은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">아버지 최백림</p>
+                <p class="account-person__num">신한은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">어머니 김미애</p>
+                <p class="account-person__num">우리은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 신부측 -->
+      <div class="account-accordion__item">
+        <button class="account-accordion__head" data-account-target="brideAccounts">
+          <span>신부측</span>
+          <span class="account-accordion__icon">+</span>
+        </button>
+        <div class="account-accordion__body" id="brideAccounts">
+          <div class="account-accordion__body-inner">
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">신부 송혜림</p>
+                <p class="account-person__num">국민은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">아버지 송동섭</p>
+                <p class="account-person__num">신한은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+            <div class="account-person">
+              <div>
+                <p class="account-person__name">어머니 박옥이</p>
+                <p class="account-person__num">우리은행 000-000000-00-000</p>
+              </div>
+              <div class="account-person__actions">
+                <button class="account-person__btn" data-copy-target="000-000000-00-000" aria-label="계좌번호 복사">&#128203;</button>
+                <a class="account-person__btn account-person__btn--pay" data-kakaopay-url="" data-copy-target="000-000000-00-000" aria-label="카카오페이로 송금">&#128176;</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. 클로징 섹션
+  ============================================================= -->
+  <section class="closing">
+    <div class="closing__bg">
+      <!-- <img src="image10.jpg" alt="클로징 사진"> -->
+      <div class="closing__bg-placeholder">CLOSING PHOTO<br>(image10.jpg)</div>
+    </div>
+    <div class="closing__scrim"></div>
+    <div class="closing__content">
+      <p class="closing__quote">저희의 새로운 시작을<br>따뜻한 마음으로 축복해주세요</p>
+      <button class="closing__share" id="shareBtn">
+        <span>&#128279;</span> 청첩장 링크 복사하기
+      </button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer__names">최원우 &amp; 송혜림 드림</p>
+    <p class="footer__copyright">Copyright ⓒ 2026. All rights reserved.</p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   전역 유틸
+============================================================= */
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+function showToast(message){
+  toastEl.textContent = message;
+  toastEl.classList.add('is-show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('is-show'), 1800);
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch(err){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+}
+
+/* ============================================================
+   0. 스크롤 시 문장 단위로 순차적으로 떠오르는 효과
+   ------------------------------------------------------------
+   각 .reveal 섹션 안에서 눈에 보이는 텍스트 줄들을 찾아
+   .line-reveal 클래스를 붙이고, 등장 순서대로 딜레이를 줍니다.
+   섹션이 화면에 들어오는 순간 그 안의 모든 줄이 순서대로 살아납니다.
+============================================================= */
+const LINE_SELECTOR = 'p, h2, .calendar__kicker, .calendar__title, .calendar__date, ' +
+  '.calendar__time, .dday__caption, .location__venue-name, .location__addr, ' +
+  '.location__tel, .transit__title';
+
+const revealSections = document.querySelectorAll('.reveal');
+
+revealSections.forEach((section) => {
+  const lines = section.querySelectorAll(LINE_SELECTOR);
+  lines.forEach((line, i) => {
+    line.classList.add('line-reveal');
+    // 줄마다 70ms씩 늦게 등장 (최대 8줄까지만 딜레이를 늘려 너무 늦어지지 않게 함)
+    line.style.transitionDelay = `${Math.min(i, 8) * 70}ms`;
+  });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if(entry.isIntersecting){
+      entry.target.querySelectorAll('.line-reveal').forEach((line) => line.classList.add('is-visible'));
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealSections.forEach((el) => revealObserver.observe(el));
+
+/* ============================================================
+   1. 예식 일시 상수
+   🔧 예식 일시를 바꾸려면 이 값만 수정하세요. 캘린더/디데이가 모두 연동됩니다.
+============================================================= */
+const WEDDING_DATE = new Date('2026-12-19T13:30:00+09:00');
+
+/* ============================================================
+   2. 캘린더 그리드 생성 (예식 월을 기준으로 자동 생성)
+============================================================= */
+const calendarGrid = document.getElementById('calendarGrid');
+const DOW = ['일','월','화','수','목','금','토'];
+
+function buildCalendar(){
+  const year = WEDDING_DATE.getFullYear();
+  const month = WEDDING_DATE.getMonth(); // 0-index
+  const weddingDate = WEDDING_DATE.getDate();
+
+  // 요일 헤더
+  DOW.forEach((d) => {
+    const el = document.createElement('div');
+    el.className = 'calendar__dow';
+    el.textContent = d;
+    calendarGrid.appendChild(el);
+  });
+
+  const firstDay = new Date(year, month, 1).getDay(); // 이번 달 1일의 요일
+  const lastDate = new Date(year, month + 1, 0).getDate(); // 이번 달 마지막 날짜
+
+  // 1일 이전 빈 칸
+  for(let i = 0; i < firstDay; i++){
+    const el = document.createElement('div');
+    el.className = 'calendar__day is-empty';
+    calendarGrid.appendChild(el);
+  }
+
+  // 날짜 칸
+  for(let date = 1; date <= lastDate; date++){
+    const el = document.createElement('div');
+    const dow = new Date(year, month, date).getDay();
+    el.className = 'calendar__day';
+    if(dow === 0) el.classList.add('is-sun');
+    if(dow === 6) el.classList.add('is-sat');
+    if(date === weddingDate) el.classList.add('is-wedding');
+    el.textContent = date;
+    calendarGrid.appendChild(el);
+  }
+}
+buildCalendar();
+
+/* ============================================================
+   3. D-Day 카운트다운
+============================================================= */
+function updateCountdown(){
+  const now = new Date();
+  let diff = WEDDING_DATE.getTime() - now.getTime();
+
+  const daysEl = document.getElementById('ddayDays');
+  const hoursEl = document.getElementById('ddayHours');
+  const minutesEl = document.getElementById('ddayMinutes');
+  const secondsEl = document.getElementById('ddaySeconds');
+  const captionEl = document.getElementById('ddayCaption');
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  if(diff <= 0){
+    daysEl.textContent = '00'; hoursEl.textContent = '00';
+    minutesEl.textContent = '00'; secondsEl.textContent = '00';
+    captionEl.textContent = '저희 결혼식에 와주셔서 감사합니다.';
+    return;
+  }
+
+  const days = Math.floor(diff / 86400000); diff -= days * 86400000;
+  const hours = Math.floor(diff / 3600000); diff -= hours * 3600000;
+  const minutes = Math.floor(diff / 60000); diff -= minutes * 60000;
+  const seconds = Math.floor(diff / 1000);
+
+  daysEl.textContent = pad(days);
+  hoursEl.textContent = pad(hours);
+  minutesEl.textContent = pad(minutes);
+  secondsEl.textContent = pad(seconds);
+  captionEl.textContent = `원우, 혜림의 결혼식이 ${days}일 남았습니다.`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ============================================================
+   4. 갤러리 - 풀블리드 스와이프 슬라이더
+   🔧 이미지 개수를 바꾸려면 GALLERY_COUNT 값을 수정하세요.
+============================================================= */
+const GALLERY_COUNT = 10;
+const galleryTrack = document.getElementById('galleryTrack');
+const galleryCount = document.getElementById('galleryCount');
+const galleryPrev = document.getElementById('galleryPrev');
+const galleryNext = document.getElementById('galleryNext');
+let galleryIndex = 0;
+
+for(let i = 1; i <= GALLERY_COUNT; i++){
+  const fileName = `image${i}.jpg`; // 🔧 실제 파일명 규칙과 다르면 이 부분만 수정하세요.
+  const slide = document.createElement('div');
+  slide.className = 'gallery__slide';
+  slide.innerHTML = `
+    <img src="${fileName}" alt="갤러리 사진 ${i}"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="gallery__slide-placeholder" style="display:none;">${fileName}</div>
+  `;
+  galleryTrack.appendChild(slide);
+}
+
+function updateGalleryPosition(animate = true){
+  galleryTrack.style.transition = animate ? 'transform .35s ease' : 'none';
+  galleryTrack.style.transform = `translateX(${-galleryIndex * 100}%)`;
+  galleryCount.textContent = `${galleryIndex + 1} / ${GALLERY_COUNT}`;
+}
+
+function goGallery(delta){
+  galleryIndex = Math.min(Math.max(galleryIndex + delta, 0), GALLERY_COUNT - 1);
+  updateGalleryPosition(true);
+}
+
+galleryPrev.addEventListener('click', () => goGallery(-1));
+galleryNext.addEventListener('click', () => goGallery(1));
+
+/* 스와이프(터치) 제어 */
+let gTouchStartX = 0, gTouchDeltaX = 0, gIsTouching = false;
+galleryTrack.addEventListener('touchstart', (e) => {
+  gIsTouching = true;
+  gTouchStartX = e.touches[0].clientX;
+  galleryTrack.style.transition = 'none';
+}, { passive:true });
+
+galleryTrack.addEventListener('touchmove', (e) => {
+  if(!gIsTouching) return;
+  gTouchDeltaX = e.touches[0].clientX - gTouchStartX;
+  const baseOffset = -galleryIndex * 100;
+  const dragPercent = (gTouchDeltaX / galleryTrack.clientWidth) * 100;
+  galleryTrack.style.transform = `translateX(${baseOffset + dragPercent}%)`;
+}, { passive:true });
+
+galleryTrack.addEventListener('touchend', () => {
+  gIsTouching = false;
+  const threshold = galleryTrack.clientWidth * 0.18;
+  if(gTouchDeltaX > threshold) goGallery(-1);
+  else if(gTouchDeltaX < -threshold) goGallery(1);
+  else updateGalleryPosition(true);
+  gTouchDeltaX = 0;
+});
+
+updateGalleryPosition(false);
+
+/* ============================================================
+   5. 오시는 길 - 주소 복사 + 길찾기 딥링크
+   🔧 실제 주소로 교체 시 VENUE_ADDRESS 상수만 함께 수정하면
+      아래 두 버튼 링크도 자동으로 갱신됩니다.
+============================================================= */
+const VENUE_ADDRESS = '서울특별시 강남구 밀리내로 10길 39 빌라드지디 수서 단독홀';
+
+document.getElementById('naverMapLink').href =
+  `https://map.naver.com/v5/search/${encodeURIComponent(VENUE_ADDRESS)}`;
+document.getElementById('kakaoMapLink').href =
+  `https://map.kakao.com/link/search/${encodeURIComponent(VENUE_ADDRESS)}`;
+
+document.getElementById('venueAddr').addEventListener('click', async () => {
+  const ok = await copyText(VENUE_ADDRESS);
+  showToast(ok ? '주소가 복사되었습니다' : '복사에 실패했습니다');
+});
+
+/* ============================================================
+   6. 혼주에게 연락하기 바텀시트
+============================================================= */
+const hostSheet = document.getElementById('hostSheet');
+
+function openHostSheet(){
+  hostSheet.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeHostSheet(){
+  hostSheet.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('hostCallOpen').addEventListener('click', openHostSheet);
+document.getElementById('hostSheetClose').addEventListener('click', closeHostSheet);
+document.getElementById('hostSheetBackdrop').addEventListener('click', closeHostSheet);
+
+/* ============================================================
+   7. 마음 전하실 곳 - 신랑측/신부측 개별 아코디언 + 복사 + 카카오페이
+============================================================= */
+document.querySelectorAll('.account-accordion__head').forEach((head) => {
+  head.addEventListener('click', () => {
+    const body = document.getElementById(head.getAttribute('data-account-target'));
+    const item = head.closest('.account-accordion__item');
+    const isOpen = item.classList.contains('is-open');
+
+    if(isOpen){
+      item.classList.remove('is-open');
+      body.style.maxHeight = null;
+    }else{
+      item.classList.add('is-open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+});
+
+// 계좌번호 복사 버튼 (회색 아이콘)
+document.querySelectorAll('.account-person__btn:not(.account-person__btn--pay)').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    const num = btn.getAttribute('data-copy-target');
+    const ok = await copyText(num);
+    if(ok){
+      btn.classList.add('is-copied');
+      showToast('계좌번호가 복사되었습니다');
+      setTimeout(() => btn.classList.remove('is-copied'), 1200);
+    }else{
+      showToast('복사에 실패했습니다');
+    }
+  });
+});
+
+// 카카오페이 버튼 (노란 아이콘)
+// - data-kakaopay-url 이 채워져 있으면 그 링크로 이동합니다.
+// - 비어있으면(기본값) 계좌번호를 대신 복사합니다.
+document.querySelectorAll('.account-person__btn--pay').forEach((btn) => {
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const payUrl = btn.getAttribute('data-kakaopay-url');
+    if(payUrl){
+      window.open(payUrl, '_blank', 'noopener');
+      return;
+    }
+    const num = btn.getAttribute('data-copy-target');
+    const ok = await copyText(num);
+    showToast(ok ? '계좌번호가 복사되었습니다' : '복사에 실패했습니다');
+  });
+});
+
+/* ============================================================
+   8. 청첩장 링크 복사 (카카오톡 공유 SDK 대체)
+   ※ 카카오톡 공유 버튼은 카카오 디벨로퍼스에 앱 등록 + JS 키가 필요해
+     이 버전에서는 '링크 복사' 방식으로 대체했습니다.
+============================================================= */
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const ok = await copyText(window.location.href);
+  showToast(ok ? '청첩장 링크가 복사되었습니다' : '복사에 실패했습니다');
+});
+</script>
+
+</body>
+</html>
