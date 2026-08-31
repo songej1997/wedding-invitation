@@ -117,9 +117,10 @@ section{ padding: 64px 28px; }
 .cover__frame{
   position:relative;
   width:100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2; /* 🔧 업로드하는 사진 비율에 맞춰 조정하세요 (인물사진이면 4/5 추천) */
   border-radius: 4px;
   overflow:hidden;
+  background: #F4F1EA;
   box-shadow: 0 18px 40px rgba(43,43,40,0.16);
 }
 
@@ -127,7 +128,7 @@ section{ padding: 64px 28px; }
   width:100%; height:100%;
   object-fit:cover;
   display:block;
-  /* 🔧 실제 배포 시 image1.jpg (메인 사진)로 교체하세요 */
+  /* 🔧 실제 배포 시 main.jpg (메인 사진)로 교체하세요. */
 }
 
 .cover__frame-placeholder{
@@ -141,13 +142,13 @@ section{ padding: 64px 28px; }
 
 .cover__overlay-word{
   position:absolute;
-  left:0; right:0; bottom:14%;
+  left:0; right:0; top:6%;
   font-family: var(--font-en);
   font-style: italic;
   font-weight: 500;
-  font-size: 56px;
-  color: #FFFFFF;
-  text-shadow: 0 2px 18px rgba(0,0,0,0.25);
+  font-size: 44px;
+  color: var(--ink);
+  text-shadow: 0 2px 14px rgba(244,241,234,0.9), 0 0 4px rgba(244,241,234,0.9);
 }
 
 .cover__names{
@@ -732,6 +733,36 @@ section{ padding: 64px 28px; }
 .footer__copyright{ margin-top: 18px; font-size: 10.5px; color: var(--ink-faint); }
 
 /* 토스트 */
+/* 배경음악 토글 버튼 (우측 상단 고정) */
+.music-toggle{
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1300;
+  width: 40px; height:40px;
+  border-radius: 50%;
+  border: 1px solid rgba(43,43,40,0.12);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  color: var(--ink);
+  font-size: 16px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* 재생 중일 때 살짝 회전하는 음표 아이콘 느낌 */
+.music-toggle.is-playing .music-toggle__icon{
+  animation: music-spin 3.5s linear infinite;
+}
+@keyframes music-spin{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce){
+  .music-toggle.is-playing .music-toggle__icon{ animation:none; }
+}
+
 .toast{
   position: fixed;
   left: 50%;
@@ -755,18 +786,29 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 </head>
 <body>
 
+<!-- ============================================================
+     배경음악
+     🔧 bgm.mp3 를 실제 음원 파일로 교체하세요 (파일명이 다르면 src만 수정).
+     대부분의 모바일 브라우저는 소리 있는 자동재생을 막기 때문에,
+     페이지 진입 시 재생을 시도하고 막히면 화면을 처음 터치하는 순간 재생됩니다.
+============================================================= -->
+<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<button class="music-toggle" id="musicToggle" aria-label="배경음악 재생/정지">
+  <span class="music-toggle__icon" id="musicToggleIcon">&#127925;</span>
+</button>
+
 <div class="wrap">
 
   <!-- ============================================================
        1. 커버 섹션
-       🔧 image1.jpg 를 실제 메인 사진 파일로 교체하세요.
+       🔧 main.jpg 를 실제 메인 사진 파일로 교체하세요.
   ============================================================= -->
   <section class="cover">
     <p class="cover__eyebrow">WEDDING CEREMONY</p>
     <div class="cover__frame">
-      <!-- 이미지가 있으면 아래 img 태그의 주석을 해제하고 placeholder div는 삭제하세요 -->
-      <!-- <img src="image1.jpg" alt="원우 · 혜림 메인 사진"> -->
-      <div class="cover__frame-placeholder">MAIN PHOTO<br>(image1.jpg)</div>
+      <img src="main.jpg" alt="원우 · 혜림 메인 사진"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="cover__frame-placeholder" style="display:none;">MAIN PHOTO<br>(main.jpg)</div>
       <div class="cover__overlay-word">invite</div>
     </div>
     <p class="cover__names">WONWOO &amp; HYERIM</p>
@@ -889,7 +931,7 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 
   <!-- ============================================================
        4. 갤러리 섹션 (풀블리드 스와이프 슬라이더)
-       🔧 image1.jpg ~ image10.jpg 를 실제 사진 파일로 교체하세요.
+       🔧 gallery1.jpg ~ gallery10.jpg 를 실제 사진 파일로 교체하세요.
   ============================================================= -->
   <section class="gallery reveal">
     <p class="eyebrow">GALLERY</p>
@@ -897,7 +939,7 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 
     <div class="gallery__viewport">
       <div class="gallery__track" id="galleryTrack">
-        <!-- JS가 image1.jpg ~ image10.jpg 슬라이드를 생성합니다 -->
+        <!-- JS가 gallery1.jpg ~ gallery10.jpg 슬라이드를 생성합니다 -->
       </div>
       <button class="gallery__arrow gallery__arrow--prev" id="galleryPrev" aria-label="이전 사진">&#10094;</button>
       <button class="gallery__arrow gallery__arrow--next" id="galleryNext" aria-label="다음 사진">&#10095;</button>
@@ -910,8 +952,8 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
   ============================================================= -->
   <section class="location reveal">
     <div class="location__photo">
-      <!-- <img src="image9.jpg" alt="예식장 전경"> -->
-      <div class="location__photo-placeholder">VENUE PHOTO<br>(image9.jpg)</div>
+      <!-- <img src="venue.jpg" alt="예식장 전경"> -->
+      <div class="location__photo-placeholder">VENUE PHOTO<br>(venue.jpg)</div>
     </div>
 
     <p class="eyebrow">LOCATION</p>
@@ -1071,8 +1113,8 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
   ============================================================= -->
   <section class="closing">
     <div class="closing__bg">
-      <!-- <img src="image10.jpg" alt="클로징 사진"> -->
-      <div class="closing__bg-placeholder">CLOSING PHOTO<br>(image10.jpg)</div>
+      <!-- <img src="closing.jpg" alt="클로징 사진"> -->
+      <div class="closing__bg-placeholder">CLOSING PHOTO<br>(closing.jpg)</div>
     </div>
     <div class="closing__scrim"></div>
     <div class="closing__content">
@@ -1093,6 +1135,49 @@ button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 <div class="toast" id="toast"></div>
 
 <script>
+/* ============================================================
+   배경음악 : 자동재생 시도 + 실패 시 첫 터치에서 재생 + 토글 버튼
+============================================================= */
+const bgm = document.getElementById('bgm');
+const musicToggle = document.getElementById('musicToggle');
+const musicToggleIcon = document.getElementById('musicToggleIcon');
+bgm.volume = 0.5; // 🔧 기본 볼륨 (0~1). 너무 크지 않게 기본값을 살짝 낮춰뒀습니다.
+
+function setMusicButtonState(isPlaying){
+  musicToggle.classList.toggle('is-playing', isPlaying);
+  musicToggleIcon.textContent = isPlaying ? '\u{1F3B5}' : '\u{1F507}'; // 🎵 / 🔇
+}
+
+function tryAutoplay(){
+  const playPromise = bgm.play();
+  if(playPromise !== undefined){
+    playPromise
+      .then(() => setMusicButtonState(true))
+      .catch(() => {
+        // 자동재생이 막힌 경우: 화면을 처음 터치/클릭하는 순간 재생합니다.
+        setMusicButtonState(false);
+        const startOnFirstTouch = () => {
+          bgm.play().then(() => setMusicButtonState(true)).catch(() => {});
+          document.removeEventListener('touchstart', startOnFirstTouch);
+          document.removeEventListener('click', startOnFirstTouch);
+        };
+        document.addEventListener('touchstart', startOnFirstTouch, { once:true });
+        document.addEventListener('click', startOnFirstTouch, { once:true });
+      });
+  }
+}
+tryAutoplay();
+
+// 우측 상단 버튼으로 수동 재생/정지
+musicToggle.addEventListener('click', () => {
+  if(bgm.paused){
+    bgm.play().then(() => setMusicButtonState(true)).catch(() => {});
+  }else{
+    bgm.pause();
+    setMusicButtonState(false);
+  }
+});
+
 /* ============================================================
    전역 유틸
 ============================================================= */
@@ -1252,7 +1337,7 @@ const galleryNext = document.getElementById('galleryNext');
 let galleryIndex = 0;
 
 for(let i = 1; i <= GALLERY_COUNT; i++){
-  const fileName = `image${i}.jpg`; // 🔧 실제 파일명 규칙과 다르면 이 부분만 수정하세요.
+  const fileName = `gallery${i}.jpg`; // 🔧 실제 파일명 규칙과 다르면 이 부분만 수정하세요.
   const slide = document.createElement('div');
   slide.className = 'gallery__slide';
   slide.innerHTML = `
